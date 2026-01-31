@@ -12,6 +12,7 @@ namespace VakaCase.Infrastructure.Context
         {
         }
 
+        public DbSet<Device> Devices { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(DependencyInjection).Assembly);
