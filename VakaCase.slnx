@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="VakaCase/VakaCase.Application/VakaCase.Application.csproj" />
+  <Project Path="VakaCase/VakaCase.Domain/VakaCase.Domain.csproj" />
+  <Project Path="VakaCase/VakaCase.Infrastructure/VakaCase.Infrastructure.csproj" />
+  <Project Path="VakaCase/VakaCase.WebAPI/VakaCase.WebAPI.csproj" />
+</Solution>

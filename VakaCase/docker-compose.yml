@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  webapi:
+    build:
+      context: ./VakaCase.WebAPI
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    env_file:
+      - ./VakaCase.WebAPI/.env
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data: { }

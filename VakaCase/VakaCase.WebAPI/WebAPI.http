@@ -1,0 +1,6 @@
+@VakaCase.WebAPI_HostAddress = http://localhost:5193
+
+GET {{VakaCase.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
