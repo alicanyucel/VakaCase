@@ -2,8 +2,11 @@ using DefaultCorsPolicyNugetPackage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using VakaCase.Application;
+using VakaCase.Application.Abstractions;
 using VakaCase.Infrastructure;
+using VakaCase.WebAPI.Hubs;
 using VakaCase.WebAPI.Middlewares;
+using VakaCase.WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,8 @@ builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
+builder.Services.AddScoped<IDeviceNotifier, SignalRDeviceNotifier>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(setup =>
 {
@@ -57,6 +62,7 @@ app.UseCors();
 app.UseExceptionHandler();
 
 app.MapControllers();
+app.MapHub<DeviceHub>("/hubs/devices");
 
 ExtensionsMiddleware.CreateFirstUser(app);
 

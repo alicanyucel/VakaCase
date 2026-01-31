@@ -1,22 +1,21 @@
 # VakaCase (.NET 8)
 
-Bu repo, **.NET 8 / ASP.NET Core Web API uzerinde kurgulanmis ornek bir uygulamadir. Mimari olarak **Domain / Application / Infrastructure / WebAPI** katmanlari ayrilmistir ve istekler **MediatR (CQRS)** ile islenir.
+Bu repo, **.NET 8 / ASP.NET Core Web API** üzerinde kurgulanmýþ örnek bir uygulamadýr.
+Mimari olarak **Domain / Application / Infrastructure / WebAPI** katmanlarý ayrýlmýþtýr ve istekler **MediatR (CQRS)** ile iþlenir.
 
 ## Proje Yapýsý
 
-- `VakaCase.Domain`: Entity'ler ve repository arayuzleri.
+- `VakaCase.Domain`: Entity'ler ve repository arayüzleri.
 - `VakaCase.Application`: Use-case'ler (Command/Query), handler'lar, validasyon ve mapping.
-- `VakaCase.Infrastructure`: EF Core `DbContext`, repository implementasyonlari, migrations.
-- `VakaCase.WebAPI`: HTTP API (controller'lar), middleware'ler ve konfigurasyon.
+- `VakaCase.Infrastructure`: EF Core `DbContext`, repository implementasyonlarý, migrations.
+- `VakaCase.WebAPI`: HTTP API (controller'lar), middleware'ler ve uygulama baþlangýç konfigürasyonu.
 
 ## Gereksinimler
 
 - .NET SDK **8.0+**
-- (Varsa) Docker Desktop
+- (Opsiyonel) Docker Desktop
 
-## Kurulum
-
-### 1) Projeyi çalýþtýrma
+## Kurulum ve Çalýþtýrma
 
 Solution klasöründe:
 
@@ -32,17 +31,18 @@ Uygulama ayaða kalktýktan sonra Swagger arayüzü genellikle þu adreste olur:
 
 > Port bilgisi `VakaCase/VakaCase.WebAPI/Properties/launchSettings.json` veya konsol çýktýsýndan görülebilir.
 
-### 2) Ortam deðiþkenleri
+### Ortam Deðiþkenleri (.env)
 
-`VakaCase/VakaCase.WebAPI/.env` içinde ortam deðiþkenleri bulunur. Gerekirse connection string ve JWT ayarlarýný buradan güncelleyebilirsiniz.
+`VakaCase/VakaCase.WebAPI/.env` içinde ortam deðiþkenleri bulunur.
+Gerekirse connection string ve JWT ayarlarýný buradan güncelleyebilirsiniz.
 
 ## API Kullanýmý
 
-Bu projede `ApiController` route þablonu þu þekildedir:
+Bu projede `ApiController` route þablonu:
 
 - `api/[controller]/[action]`
 
-Cihaz islemleri icin endpoint'ler (tamami **POST**):
+### Devices Endpoint'leri (tamamý POST)
 
 - `POST /api/Devices/GetById`
 - `POST /api/Devices/Create`
@@ -50,7 +50,7 @@ Cihaz islemleri icin endpoint'ler (tamami **POST**):
 - `POST /api/Devices/Delete`
 - `POST /api/Devices/GetAll`
 
-### Ornek Istekler
+### Örnek Ýstekler
 
 #### 1) GetAll
 
@@ -114,14 +114,25 @@ Content-Type: application/json
 }
 ```
 
+## SignalR
+
+Uygulama, cihaz iþlemlerinde SignalR ile broadcast mesajý yayar.
+
+- Hub endpoint: `/hubs/devices`
+- Event'ler:
+  - `deviceCreated`
+  - `deviceUpdated`
+  - `deviceDeleted`
+  - `deviceViewed` (GetById çaðrýldýðýnda)
+
 ## Response Formatý
 
-Baþarýlý iþlemlerde controller tarafý kullanýcý-dostu Türkçe mesaj döndürür:
+Baþarýlý iþlemlerde controller tarafý kullanýcý dostu Türkçe mesaj döndürür:
 
 - `message`: Ýþlem sonucu mesajý
-- `data`: (varsa) handler'dan donen veri
+- `data`: (varsa) handler'dan dönen veri
 
-Örn:
+Örnek:
 
 ```json
 {
@@ -132,8 +143,7 @@ Baþarýlý iþlemlerde controller tarafý kullanýcý-dostu Türkçe mesaj döndürür:
 
 ## Notlar
 
-- Dogrulama (validation) hatalari FluentValidation altyapisi uzerinden yonetilir.
-- Hata yakalama/cevaplama davranisi icin `VakaCase.WebAPI/Middlewares` klasorune bakabilirsiniz.
+- Doðrulama (validation) hatalarý FluentValidation altyapýsý üzerinden yönetilir.
 
 ## Lisans
 
