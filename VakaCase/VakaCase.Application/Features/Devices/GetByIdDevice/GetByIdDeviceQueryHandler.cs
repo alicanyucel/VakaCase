@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using TS.Result;
+using VakaCase.Domain.Entities;
+using VakaCase.Domain.Repositories;
 
-namespace VakaCase.Application.Features.Devices.GetByIdDevice
+namespace VakaCase.Application.Features.Devices.GetByIdDevice;
+
+
+public sealed class GetByIdDeviceQueryHandler(IDeviceRepository deviceRepository) : IRequestHandler<GetByIdDeviceQuery, Result<Device>>
 {
-    internal class GetByIdDeviceQueryHandler
+    public async Task<Result<Device>> Handle(GetByIdDeviceQuery request, CancellationToken cancellationToken)
     {
+        var device = await deviceRepository.GetByExpressionAsync(d => d.Id == request.Id, cancellationToken);
+        if (device is null || device.IsDeleted)
+        return Result<Device>.Failure("Cihaz bulunamadı.");
+        return Result<Device>.Succeed(device);
     }
 }

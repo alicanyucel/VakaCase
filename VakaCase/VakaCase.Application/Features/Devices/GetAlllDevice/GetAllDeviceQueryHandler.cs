@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TS.Result;
+using VakaCase.Domain.Entities;
+using VakaCase.Domain.Repositories;
 
-namespace VakaCase.Application.Features.Devices.GetAlllDevice
+namespace VakaCase.Application.Features.Devices.GetAlllDevice;
+
+public class GetAllDevicesQueryHandler
 {
-    internal class GetAllDeviceQueryHandler
+    private readonly IDeviceRepository _deviceRepository;
+
+    public GetAllDevicesQueryHandler(IDeviceRepository deviceRepository)
     {
+        _deviceRepository = deviceRepository;
+    }
+
+    public async Task<Result<List<Device>>> Handle(GetAllDeviceQuery request, CancellationToken cancellationToken)
+    {
+        var devices = _deviceRepository.GetAll().Where(d => !d.IsDeleted).ToList();
+        return Result<List<Device>>.Succeed(devices);
     }
 }

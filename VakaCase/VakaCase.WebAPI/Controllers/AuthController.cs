@@ -4,20 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using VakaCase.Application.Features.Auth.Login;
 using VakaCase.WebAPI.Abstractions;
 
-namespace VakaCase.WebAPI.Controllers
-{
-    [AllowAnonymous]
-    public sealed class AuthController : ApiController
-    {
-        public AuthController(IMediator mediator) : base(mediator)
-        {
-        }
+namespace VakaCase.WebAPI.Controllers;
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginCommand request, CancellationToken cancellationToken)
-        {
-            var response = await _mediator.Send(request, cancellationToken);
-            return StatusCode(response.StatusCode, response);
-        }
+[AllowAnonymous]
+public sealed class AuthController : ApiController
+{
+    public AuthController(IMediator mediator) : base(mediator)
+    {
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginCommand request, CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(request, cancellationToken);
+        return StatusCode(response.StatusCode, response);
     }
 }
