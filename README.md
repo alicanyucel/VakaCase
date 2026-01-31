@@ -1,13 +1,13 @@
 # VakaCase (.NET 8)
 
-Bu repo, **.NET 8 / ASP.NET Core Web API** üzerinde kurgulanmýþ örnek bir uygulamadýr. Mimari olarak **Domain / Application / Infrastructure / WebAPI** katmanlarý ayrýlmýþtýr ve istekler **MediatR (CQRS)** ile iþlenir.
+Bu repo, **.NET 8 / ASP.NET Core Web API uzerinde kurgulanmis ornek bir uygulamadir. Mimari olarak **Domain / Application / Infrastructure / WebAPI** katmanlari ayrilmistir ve istekler **MediatR (CQRS)** ile islenir.
 
 ## Proje Yapýsý
 
-- `VakaCase.Domain`: Entity’ler ve repository arayüzleri.
-- `VakaCase.Application`: Use-case’ler (Command/Query), handler’lar, validasyon ve mapping.
-- `VakaCase.Infrastructure`: EF Core `DbContext`, repository implementasyonlarý, migrations.
-- `VakaCase.WebAPI`: HTTP API (controller’lar), middleware’ler ve konfigurasyon.
+- `VakaCase.Domain`: Entity'ler ve repository arayuzleri.
+- `VakaCase.Application`: Use-case'ler (Command/Query), handler'lar, validasyon ve mapping.
+- `VakaCase.Infrastructure`: EF Core `DbContext`, repository implementasyonlari, migrations.
+- `VakaCase.WebAPI`: HTTP API (controller'lar), middleware'ler ve konfigurasyon.
 
 ## Gereksinimler
 
@@ -42,7 +42,7 @@ Bu projede `ApiController` route þablonu þu þekildedir:
 
 - `api/[controller]/[action]`
 
-Cihaz iþlemleri için endpoint’ler (tamamý **POST**):
+Cihaz islemleri icin endpoint'ler (tamami **POST**):
 
 - `POST /api/Devices/GetById`
 - `POST /api/Devices/Create`
@@ -50,7 +50,7 @@ Cihaz iþlemleri için endpoint’ler (tamamý **POST**):
 - `POST /api/Devices/Delete`
 - `POST /api/Devices/GetAll`
 
-### Örnek Ýstekler
+### Ornek Istekler
 
 #### 1) GetAll
 
@@ -119,7 +119,7 @@ Content-Type: application/json
 Baþarýlý iþlemlerde controller tarafý kullanýcý-dostu Türkçe mesaj döndürür:
 
 - `message`: Ýþlem sonucu mesajý
-- `data`: (varsa) handler’dan dönen veri
+- `data`: (varsa) handler'dan donen veri
 
 Örn:
 
@@ -132,8 +132,8 @@ Baþarýlý iþlemlerde controller tarafý kullanýcý-dostu Türkçe mesaj döndürür:
 
 ## Notlar
 
-- Doðrulama (validation) hatalarý FluentValidation altyapýsý üzerinden yönetilir.
-- Hata yakalama/cevaplama davranýþý için `VakaCase.WebAPI/Middlewares` klasörüne bakabilirsiniz.
+- Dogrulama (validation) hatalari FluentValidation altyapisi uzerinden yonetilir.
+- Hata yakalama/cevaplama davranisi icin `VakaCase.WebAPI/Middlewares` klasorune bakabilirsiniz.
 
 ## Lisans
 
