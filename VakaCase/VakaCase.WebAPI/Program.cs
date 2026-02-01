@@ -63,6 +63,7 @@ app.UseExceptionHandler();
 
 app.MapControllers();
 app.MapHub<DeviceHub>("/hubs/devices");
+app.MapHub<DeviceHub>("/deviceHub");
 
 ExtensionsMiddleware.CreateFirstUser(app);
 

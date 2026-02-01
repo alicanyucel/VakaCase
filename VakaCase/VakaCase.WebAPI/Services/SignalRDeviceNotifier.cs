@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using VakaCase.Application.Abstractions;
 using VakaCase.WebAPI.Hubs;
 
-namespace VakaCase.Infrastructure.SignalR;
+namespace VakaCase.WebAPI.Services;
 
 internal sealed class SignalRDeviceNotifier : IDeviceNotifier
 {
