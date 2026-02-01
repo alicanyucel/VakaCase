@@ -1,11 +1,22 @@
 using Microsoft.AspNetCore.SignalR;
+using VakaCase.Domain.Entities;
 
 namespace VakaCase.WebAPI.Hubs;
 
-public sealed class DeviceHub : Hub
+public class DeviceHub : Hub
 {
-    public const string DeviceCreatedMethod = "deviceCreated";
-    public const string DeviceUpdatedMethod = "deviceUpdated";
-    public const string DeviceDeletedMethod = "deviceDeleted";
-    public const string DeviceViewedMethod = "deviceViewed";
+    public async Task NotifyDeviceDeleted(string deviceId)
+    {
+        await Clients.Others.SendAsync("DeviceDeleted", deviceId);
+    }
+
+    public async Task NotifyDeviceAdded(Device device)
+    {
+        await Clients.Others.SendAsync("DeviceAdded", device);
+    }
+
+    public async Task NotifyDeviceUpdated(Device device)
+    {
+        await Clients.Others.SendAsync("DeviceUpdated", device);
+    }
 }
